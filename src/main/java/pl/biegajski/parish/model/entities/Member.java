@@ -22,6 +22,7 @@ public class Member {
     private String occupation;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "family_id")
     private Family family;
 
 
