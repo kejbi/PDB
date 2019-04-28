@@ -2,12 +2,16 @@ package pl.biegajski.parish.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.biegajski.parish.controllers.viewmodel.FamilyViewModel;
+import pl.biegajski.parish.mappers.FamilyMapper;
 import pl.biegajski.parish.model.entities.Family;
 import pl.biegajski.parish.model.entities.Member;
 import pl.biegajski.parish.services.FamilyService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/family")
@@ -15,24 +19,29 @@ public class FamilyController {
 
     private FamilyService familyService;
 
+    private FamilyMapper mapper;
+
     @Autowired
-    public FamilyController(FamilyService familyService) {
+    public FamilyController(FamilyService familyService, FamilyMapper mapper) {
         this.familyService = familyService;
+        this.mapper = mapper;
     }
 
     @GetMapping
-    public Optional<Family> findFamilyById(@RequestParam Long id){
-        return familyService.findFamilyById(id);
+    public FamilyViewModel findFamilyById(@RequestParam Long id){
+        var family = familyService.findFamilyById(id).orElseThrow(EntityNotFoundException::new);
+        return mapper.convertToViewModel(family);
     }
 
     @GetMapping("/all")
-    public List<Family> getAllFamilies(){
-        return familyService.getAllFamilies();
+    public List<FamilyViewModel> getAllFamilies(){
+        var families = familyService.getAllFamilies();
+
+        return families.stream()
+                .map(family -> mapper.convertToViewModel(family))
+                .collect(Collectors.toList());
     }
 
-    @PostMapping
-    public void addMember(@RequestBody Member member, @RequestParam Long familyId){
-        familyService.addMember(member, familyId);
-    }
+
 
 }
