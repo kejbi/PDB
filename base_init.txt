@@ -1,0 +1,6 @@
+insert into family values (1, 'zielona 1/29 Czu³kowo', 'Zieloni');
+insert into family values (2, 'czarna 1/30 Czu³kowo', 'Czarni');
+insert into member values (1, '1999-01-15', 'Jan', 'Rolnik', 0, 'Zielony', 1);
+insert into member values (2, '1989-01-12', 'Micha³', 'Nauczyciel', 0, 'Zielony', 1);
+insert into member values (3, '1989-01-12', 'Pawe³', 'Programista', 0, 'Czarny', 2);
+insert into member values (4, '1989-01-12', 'Anna', 'Programista', 1, 'Czarna', 2);
