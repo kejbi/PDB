@@ -1,14 +1,16 @@
 package pl.biegajski.parish.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.biegajski.parish.controllers.viewmodel.FamilyViewModel;
 import pl.biegajski.parish.mappers.FamilyMapper;
 import pl.biegajski.parish.model.entities.Family;
-import pl.biegajski.parish.model.entities.Member;
 import pl.biegajski.parish.services.FamilyService;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,6 +43,19 @@ public class FamilyController {
                 .map(family -> mapper.convertToViewModel(family))
                 .collect(Collectors.toList());
     }
+
+    @PostMapping
+    public Family saveFamily(@RequestBody @Valid FamilyViewModel familyViewModel, BindingResult bidingResult){
+        if(bidingResult.hasErrors()){
+            throw new ValidationException();
+        }
+
+        var family = mapper.convertToEntity(familyViewModel);
+
+        return familyService.saveFamily(family);
+    }
+
+
 
 
 

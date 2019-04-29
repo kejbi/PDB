@@ -27,13 +27,7 @@ public class FamilyService {
         return familyRepository.findAll();
     }
 
-    public void addMember(Member member, Long id){
-       Optional<Family> family = familyRepository.findById(id);
-       family.ifPresent(f ->{
-            f.addMember(member);
-            familyRepository.save(f);
-       } );
-
-
+    public Family saveFamily(Family family){
+        return familyRepository.save(family);
     }
 }

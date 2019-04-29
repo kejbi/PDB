@@ -23,8 +23,13 @@ public class Family {
     @JoinColumn
     private List<Visitation> visitations;
 
-    public void addMember(Member member){
-        members.add(member);
+    public Family() {
+    }
+
+    public Family(Long id, String address, String familyName) {
+        this.familyId = id;
+        this.address = address;
+        this.familyName = familyName;
     }
 
     public Long getFamilyId() {

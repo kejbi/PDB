@@ -8,14 +8,14 @@ import pl.biegajski.parish.model.entities.Family;
 public class FamilyMapper {
 
     public FamilyViewModel convertToViewModel(Family family){
-        return new FamilyViewModel(family.getFamilyId(), family.getAddress(), family.getFamilyName());
+        return new FamilyViewModel(family.getFamilyId(),
+                                    family.getAddress(),
+                                    family.getFamilyName());
     }
 
     public Family convertToEntity(FamilyViewModel familyViewModel){
-        var family = new Family();
-        family.setFamilyId(familyViewModel.getFamilyId());
-        family.setAddress(familyViewModel.getAddress());
-        family.setFamilyName(familyViewModel.getFamilyName());
-        return family;
+        return new Family(familyViewModel.getFamilyId(),
+                            familyViewModel.getAddress(),
+                            familyViewModel.getFamilyName());
     }
 }
