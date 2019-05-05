@@ -30,4 +30,8 @@ public class FamilyService {
     public Family saveFamily(Family family){
         return familyRepository.save(family);
     }
+
+    public void deleteFamily(Long id){
+        familyRepository.deleteById(id);
+    }
 }

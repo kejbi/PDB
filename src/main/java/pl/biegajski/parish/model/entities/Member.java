@@ -25,8 +25,15 @@ public class Member {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
-    @JsonIgnore
     private Family family;
+
+    public Member(String name, String surname, Sex sex, LocalDate dateOfBirth, String occupation) {
+        this.name = name;
+        this.surname = surname;
+        this.sex = sex;
+        this.dateOfBirth = dateOfBirth;
+        this.occupation = occupation;
+    }
 
     public Long getMemberId() {
         return memberId;

@@ -12,7 +12,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,6 +54,10 @@ public class FamilyController {
         return familyService.saveFamily(family);
     }
 
+    @DeleteMapping
+    public void deleteFamily(@RequestParam Long id){
+        familyService.deleteFamily(id);
+    }
 
 
 

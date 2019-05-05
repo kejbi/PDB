@@ -5,7 +5,7 @@ import pl.biegajski.parish.controllers.viewmodel.FamilyViewModel;
 import pl.biegajski.parish.model.entities.Family;
 
 @Component
-public class FamilyMapper {
+public class FamilyMapper implements MapperInterface<Family, FamilyViewModel> {
 
     public FamilyViewModel convertToViewModel(Family family){
         return new FamilyViewModel(family.getFamilyId(),
